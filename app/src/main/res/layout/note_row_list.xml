@@ -7,8 +7,9 @@
     android:paddingRight="16dp"
     android:paddingTop="10dp"
     android:clickable="true"
-    android:foreground="?attr/selectableItemBackground"
-    >
+    android:background="@android:color/holo_purple"
+    android:foreground="?attr/selectableItemBackground">
+
     <TextView
         android:id="@+id/dot"
         android:layout_width="wrap_content"
@@ -16,8 +17,10 @@
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
         android:includeFontPadding="false"
-        android:textColor="@color/colorAccent"
-        android:textSize="40dp"
+        android:textColor="@android:color/holo_green_dark"
+        android:textSize="40sp"
+        android:lineSpacingExtra="0dp"
+
         />
     <TextView
         android:id="@+id/timestamp"
@@ -27,6 +30,7 @@
        android:textSize="14sp"
         />
     <TextView
+        android:id="@+id/note"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/timestamp"

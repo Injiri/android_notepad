@@ -44,6 +44,10 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        coordinatorLayout = findViewById(R.id.coordinator_layout);
+        noNotesTextView = findViewById(R.id.empty_text_view);
+        recyclerView = findViewById(R.id.recycler_view);
+
         db = new SqliteDbHelper(this);
         noteList.addAll(db.getAllNotes());
 
@@ -60,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-//        recyclerView.addItemDecoration(new DividerAnimmator());
+        recyclerView.addItemDecoration(new DividerAnimator(LinearLayoutManager.VERTICAL, this, 16));
         recyclerView.setAdapter(noteAdapter);
 
         toggleEmptyNotes();
@@ -188,6 +192,7 @@ public class MainActivity extends AppCompatActivity {
         Note n = noteList.get(position);
         db.deleteNote(n);
         noteList.remove(position);
+        noteAdapter.notifyItemRemoved(position);
 
         toggleEmptyNotes();
     }

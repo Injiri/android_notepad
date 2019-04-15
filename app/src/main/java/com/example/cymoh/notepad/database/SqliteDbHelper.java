@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SqliteDbHelper extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "nptepad_db";
+    private static final int DATABASE_VERSION = 2;
+    private static final String DATABASE_NAME = "notepad_db";
 
     public SqliteDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -97,9 +97,9 @@ public class SqliteDbHelper extends SQLiteOpenHelper {
         return notes;
     }
 
-    public  int getNotesCount(){
+    public int getNotesCount() {
 
-        String countQueary  = "SELECT * FROM " + Note.TABLE_NAME;
+        String countQueary = "SELECT * FROM " + Note.TABLE_NAME;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQueary, null);
 
@@ -110,20 +110,21 @@ public class SqliteDbHelper extends SQLiteOpenHelper {
 
     }
 
-    public int updateNote(Note note ){
-    SQLiteDatabase db = this.getWritableDatabase();
-            ContentValues values = new ContentValues();
-            values.put(Note.COLUMN_NOTE,note.getNote());
-            values.put(Note.COLUMN_NOTEDETAIL, note.getNote_detail());
-            //update a row
-        return db.update(Note.TABLE_NAME,values,Note.COLUMN_ID+"= ?",
+    public int updateNote(Note note) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(Note.COLUMN_NOTE, note.getNote());
+        values.put(Note.COLUMN_NOTEDETAIL, note.getNote_detail());
+        //update a row
+        return db.update(Note.TABLE_NAME, values, Note.COLUMN_ID + "= ?",
                 new String[]{String.valueOf(note.getId())});
-            }
- public  void deleteNote(Note note){
+    }
+
+    public void deleteNote(Note note) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(Note.TABLE_NAME, Note.COLUMN_ID + "=?",
                 new String[]{String.valueOf(note.getId())});
         db.close();
- }
+    }
 }
 
